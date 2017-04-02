@@ -14,45 +14,50 @@
         android:foreground="?android:attr/selectableItemBackground">
         <LinearLayout
             android:layout_width="match_parent"
+            android:padding="8dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textColor="#000"
-    android:textSize="25dp"
-    android:textStyle="bold"
-    android:id="@+id/name"
-    android:layout_margin="5dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/age"
-            android:textColor="#000"
-            android:textSize="25dp"
-            />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/gender"
                 android:textColor="#000"
-                android:textSize="25dp"
-                />
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:id="@+id/name"
+                android:padding="4dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/temp"
+                android:id="@+id/age"
                 android:textColor="#000"
-                android:textSize="25dp"
+                android:padding="4dp"
+                android:textSize="20sp"
                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/heartRate"
-                android:textColor="#000"
-                android:textSize="25dp"
-                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/gender"
+                    android:textColor="#000"
+                    android:padding="4dp"
+                    android:textSize="20sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/temp"
+                    android:textColor="#000"
+                    android:padding="4dp"
+                    android:textSize="20sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/heartRate"
+                    android:textColor="#000"
+                    android:padding="4dp"
+                    android:textSize="20sp"
+                    />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

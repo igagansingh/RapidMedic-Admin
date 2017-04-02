@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:id="@+id/sweep"
     tools:context="com.example.gagan.rapidmedic_admin.MainActivity">
-<ListView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/list"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list"/>
 </android.support.v4.widget.SwipeRefreshLayout>

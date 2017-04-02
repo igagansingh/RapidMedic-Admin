@@ -26,7 +26,7 @@ import java.io.FileOutputStream;
 
 public class SmsActivity extends AppCompatActivity {
 
-    Button send;
+    Button send, rcvAudio;
     String message,phoneNo;
     EditText prescriptionBody;
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0 ;
@@ -35,6 +35,39 @@ public class SmsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms);
+
+        rcvAudio = (Button) findViewById(R.id.recAudio);
+        rcvAudio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                StorageReference islandRef = storageRef.child("/recorded_audio.3gp");
+
+                final long ONE_MEGABYTE = 1024 * 1024;
+                islandRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        // Data for "images/island.jpg" is returns, use this as needed
+                        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/recordDownload1.3gp");
+                        try {
+                            FileOutputStream imageOutFile = new FileOutputStream(file);
+                            imageOutFile.write(bytes);
+                            Toast.makeText(SmsActivity.this, "Audio downloaded successfully", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle any errors
+                    }
+                });
+            }
+        });
+
         send= (Button) findViewById(R.id.sendSms);
         prescriptionBody= (EditText) findViewById(R.id.prescription);
         send.setOnClickListener(new View.OnClickListener() {
@@ -44,30 +77,7 @@ public class SmsActivity extends AppCompatActivity {
             }
         });
 
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference islandRef = storageRef.child("/recorded_audio.3gp");
 
-        final long ONE_MEGABYTE = 1024 * 1024;
-        islandRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-            @Override
-            public void onSuccess(byte[] bytes) {
-                // Data for "images/island.jpg" is returns, use this as needed
-                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + "/recordDownload1.3gp");
-                try {
-                    FileOutputStream imageOutFile = new FileOutputStream(file);
-                    imageOutFile.write(bytes);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });
     }
     protected void sendSMSMessage() {
         phoneNo = "9717003912"; //Amanjeet's Phone Number

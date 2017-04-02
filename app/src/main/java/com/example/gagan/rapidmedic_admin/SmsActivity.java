@@ -1,5 +1,7 @@
 package com.example.gagan.rapidmedic_admin;
 
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -32,28 +34,11 @@ public class SmsActivity extends AppCompatActivity {
         });
     }
     protected void sendSMSMessage() {
-        phoneNo = "9717003912";
+        phoneNo = "9717003912"; //Amanjeet's Phone Number
         message = prescriptionBody.getText().toString();
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_SEND_SMS: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(phoneNo, null, message, null, null);
-                    Toast.makeText(getApplicationContext(), "SMS sent.",
-                            Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "SMS faild, please try again.", Toast.LENGTH_LONG).show();
-                    return;
-                }
-            }
-        }
-
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(getApplicationContext(), SmsActivity.class), 0);
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(phoneNo, null, message, pendingIntent, null);
+        Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
     }
 }
